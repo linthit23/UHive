@@ -8,9 +8,9 @@
 import UIKit
 
 extension UIColor {
-    static let primary: UIColor = UIColor(hex: "2FABCD", alpha: 1)
-    static let secondary: UIColor = UIColor(hex: "99E9FF", alpha: 1)
-    static let background: UIColor = UIColor(hex: "EDFBFF", alpha: 1)
+    static let primaryColor: UIColor = UIColor(hex: "2FABCD", alpha: 1)
+    static let secondaryColor: UIColor = UIColor(hex: "99E9FF", alpha: 1)
+    static let backgroundColor: UIColor = UIColor(hex: "EDFBFF", alpha: 1)
 }
 
 
