@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23727" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentsViewController" customModule="UHive" customModuleProvider="target">
+            <connections>
+                <outlet property="closeImageView" destination="NWh-R9-vZl" id="z5M-Bj-rdA"/>
+                <outlet property="paymentsCollectionView" destination="Zpr-G8-wih" id="9pp-qh-A0z"/>
+                <outlet property="paymentsSegmentedControl" destination="EwZ-aI-f3k" id="hFQ-2Q-now"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chevron.down" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="NWh-R9-vZl">
+                    <rect key="frame" x="8" y="133.33333333333334" width="25" height="14.999999999999972"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="DSU-J6-mMS"/>
+                        <constraint firstAttribute="width" constant="25" id="EqD-44-ObS"/>
+                    </constraints>
+                </imageView>
+                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="EwZ-aI-f3k">
+                    <rect key="frame" x="16" y="161" width="361" height="32"/>
+                    <segments>
+                        <segment title="Due"/>
+                        <segment title="History"/>
+                    </segments>
+                </segmentedControl>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Zpr-G8-wih">
+                    <rect key="frame" x="0.0" y="192" width="393" height="660"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zFe-9F-rQY">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Zpr-G8-wih" secondAttribute="bottom" id="5C6-l7-cuh"/>
+                <constraint firstItem="EwZ-aI-f3k" firstAttribute="top" secondItem="NWh-R9-vZl" secondAttribute="bottom" constant="8" symbolic="YES" id="5CE-1v-Mt0"/>
+                <constraint firstItem="NWh-R9-vZl" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="7jg-Xv-zI6"/>
+                <constraint firstItem="Zpr-G8-wih" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="MLT-Yq-0in"/>
+                <constraint firstItem="NWh-R9-vZl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="QBi-RV-sCw"/>
+                <constraint firstItem="EwZ-aI-f3k" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="VMF-OQ-qgp"/>
+                <constraint firstAttribute="trailing" secondItem="Zpr-G8-wih" secondAttribute="trailing" id="mBY-Au-8OL"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EwZ-aI-f3k" secondAttribute="trailing" constant="16" id="tGi-iz-BON"/>
+                <constraint firstItem="Zpr-G8-wih" firstAttribute="top" secondItem="EwZ-aI-f3k" secondAttribute="bottom" id="w7a-Ek-6dS"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="-12"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

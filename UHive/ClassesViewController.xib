@@ -5,11 +5,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ClassesViewController" customModule="UHive" customModuleProvider="target">
             <connections>
+                <outlet property="classesCollectionView" destination="C0v-Cc-XkT" id="i5W-X6-gFg"/>
+                <outlet property="dayCollectionView" destination="maX-IT-6Gu" id="QxC-GK-C9u"/>
+                <outlet property="monthLabel" destination="Zd7-Na-NKy" id="DB7-nP-h4h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,14 +21,59 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="March" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zd7-Na-NKy">
+                    <rect key="frame" x="16" y="118" width="68" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="maX-IT-6Gu">
+                    <rect key="frame" x="0.0" y="155" width="393" height="80"/>
+                    <color key="backgroundColor" name="backgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="80" id="WKD-f0-Lu4"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="OKx-nX-uXX">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="C0v-Cc-XkT">
+                    <rect key="frame" x="0.0" y="235" width="393" height="549"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GD3-jQ-5mn">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="backgroundColor"/>
-            <point key="canvasLocation" x="37" y="-12"/>
+            <constraints>
+                <constraint firstItem="maX-IT-6Gu" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="CL3-Uw-c7p"/>
+                <constraint firstItem="C0v-Cc-XkT" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="Fa1-fp-rJv"/>
+                <constraint firstItem="maX-IT-6Gu" firstAttribute="top" secondItem="Zd7-Na-NKy" secondAttribute="bottom" constant="8" symbolic="YES" id="JGW-6W-eyF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="C0v-Cc-XkT" secondAttribute="trailing" id="QqO-4U-vqE"/>
+                <constraint firstItem="Zd7-Na-NKy" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="bny-bT-nOX"/>
+                <constraint firstItem="maX-IT-6Gu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ijS-bg-aGh"/>
+                <constraint firstItem="Zd7-Na-NKy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="shX-BB-wAf"/>
+                <constraint firstItem="C0v-Cc-XkT" firstAttribute="top" secondItem="maX-IT-6Gu" secondAttribute="bottom" id="t0K-00-uCP"/>
+                <constraint firstItem="C0v-Cc-XkT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="xfp-pq-ONJ"/>
+            </constraints>
+            <point key="canvasLocation" x="35.877862595419849" y="-12.67605633802817"/>
         </view>
     </objects>
     <resources>
         <namedColor name="backgroundColor">
             <color red="0.92941176470588238" green="0.98431372549019602" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

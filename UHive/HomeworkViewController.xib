@@ -10,6 +10,10 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeworkViewController" customModule="UHive" customModuleProvider="target">
             <connections>
+                <outlet property="alertCollectionView" destination="AN9-dC-Kfr" id="Wdd-eH-LAE"/>
+                <outlet property="alertViewAllLabel" destination="3gg-XT-T6o" id="2aa-Us-REM"/>
+                <outlet property="homeWorkViewAllLabel" destination="gd4-cl-Ffx" id="bO3-zV-Gt6"/>
+                <outlet property="homeworkCollectionView" destination="Qok-X6-7Jd" id="6Df-8r-wZm"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -17,14 +21,85 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Alerts" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eKv-eb-Cho">
+                    <rect key="frame" x="16" y="118" width="64" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gg-XT-T6o">
+                    <rect key="frame" x="167" y="413" width="59" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" name="primaryColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Homeworks" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UT2-Cw-4L2">
+                    <rect key="frame" x="16" y="435" width="128" height="29"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="AN9-dC-Kfr">
+                    <rect key="frame" x="0.0" y="155" width="393" height="250"/>
+                    <color key="backgroundColor" name="backgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="Ngr-sH-fQv"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0ac-Ls-JxG">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="Qok-X6-7Jd">
+                    <rect key="frame" x="0.0" y="472" width="393" height="250"/>
+                    <color key="backgroundColor" name="backgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="BkG-lX-DsI"/>
+                    </constraints>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Oqf-wT-8O2">
+                        <size key="itemSize" width="128" height="128"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="View All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gd4-cl-Ffx">
+                    <rect key="frame" x="167" y="730" width="59" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" name="primaryColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" name="backgroundColor"/>
-            <point key="canvasLocation" x="37" y="-12"/>
+            <constraints>
+                <constraint firstItem="Qok-X6-7Jd" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="1PO-n3-6NT"/>
+                <constraint firstItem="3gg-XT-T6o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="3V7-gV-IMW"/>
+                <constraint firstItem="gd4-cl-Ffx" firstAttribute="top" secondItem="Qok-X6-7Jd" secondAttribute="bottom" constant="8" symbolic="YES" id="4Nb-lv-We8"/>
+                <constraint firstItem="UT2-Cw-4L2" firstAttribute="top" secondItem="3gg-XT-T6o" secondAttribute="bottom" constant="2" id="6Hz-ck-iVa"/>
+                <constraint firstItem="UT2-Cw-4L2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="6ez-CS-8DG"/>
+                <constraint firstItem="AN9-dC-Kfr" firstAttribute="top" secondItem="eKv-eb-Cho" secondAttribute="bottom" constant="8" symbolic="YES" id="7ba-o7-wH0"/>
+                <constraint firstItem="AN9-dC-Kfr" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="B0Y-TN-IIo"/>
+                <constraint firstItem="gd4-cl-Ffx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="IgN-uh-5Sl"/>
+                <constraint firstItem="Qok-X6-7Jd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="XK9-6v-Kbj"/>
+                <constraint firstItem="eKv-eb-Cho" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="egA-Av-CJR"/>
+                <constraint firstItem="AN9-dC-Kfr" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hbt-eU-5XV"/>
+                <constraint firstItem="eKv-eb-Cho" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="16" id="ndH-p9-59f"/>
+                <constraint firstItem="3gg-XT-T6o" firstAttribute="top" secondItem="AN9-dC-Kfr" secondAttribute="bottom" constant="8" symbolic="YES" id="qlO-RE-P7W"/>
+                <constraint firstItem="Qok-X6-7Jd" firstAttribute="top" secondItem="UT2-Cw-4L2" secondAttribute="bottom" constant="8" symbolic="YES" id="vbY-te-52B"/>
+            </constraints>
+            <point key="canvasLocation" x="35.877862595419849" y="-12.67605633802817"/>
         </view>
     </objects>
     <resources>
         <namedColor name="backgroundColor">
             <color red="0.92941176470588238" green="0.98431372549019602" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryColor">
+            <color red="0.18431372549019609" green="0.6705882352941176" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>
