@@ -1,22 +1,20 @@
 //
-//  DuePaymentsCollectionViewCell.swift
+//  HomeworkCollectionViewCell.swift
 //  UHive
 //
-//  Created by Lin Thit on 4/25/25.
+//  Created by Lin Thit on 4/26/25.
 //
 
 import UIKit
 
-class DuePaymentsCollectionViewCell: UICollectionViewCell {
+class HomeworkCollectionViewCell: UICollectionViewCell {
 
-    static let reuseIdentifier: String = String(describing: DuePaymentsCollectionViewCell.self)
+    static let reuseIdentifier: String = String(describing: HomeworkCollectionViewCell.self)
     
     @IBOutlet weak var contentContainerView: UIView!
-    @IBOutlet weak var iconImageView: UIImageView!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
-    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var homeworkNameLabel: UILabel!
     @IBOutlet weak var dueDateLabel: UILabel!
+    @IBOutlet weak var checkImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,5 +31,6 @@ class DuePaymentsCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
     }
+
 
 }
