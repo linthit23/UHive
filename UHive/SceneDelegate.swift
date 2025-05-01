@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
-        let isLoggedIn = UserDefaults.standard.bool(forKey: "isLoggedIn")
+        let isLoggedIn = AuthManager.shared.token != nil  // ✅ Token-based check
         
         let rootVC: UIViewController
         if isLoggedIn {

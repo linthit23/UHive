@@ -96,16 +96,38 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     // Example: On login button tap
     @IBAction func loginTapped(_ sender: UIButton) {
-        // Validate login here...
+        guard let email = emailTextField.text, !email.isEmpty,
+              let password = passwordTextField.text, !password.isEmpty else {
+            showAlert(message: "Please enter both email and password.")
+            return
+        }
         
-        // Save login status
-        UserDefaults.standard.set(true, forKey: "isLoggedIn")
+        loginButton.isEnabled = false
+        loginButton.setTitle("Logging in...", for: .normal)
         
-        // Create Home and set as root
-        let homeVC = MainViewController()
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            let navController = UINavigationController(rootViewController: homeVC)
-            sceneDelegate.window?.setRootViewController(navController)
+        LoginService().login(email: email, password: password) { [weak self] success in
+            DispatchQueue.main.async {
+                self?.loginButton.isEnabled = true
+                self?.loginButton.setTitle("Login", for: .normal)
+                
+                if success {
+                    // Transition to main view
+                    let homeVC = MainViewController()
+                    if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                        let navController = UINavigationController(rootViewController: homeVC)
+                        sceneDelegate.window?.setRootViewController(navController)
+                    }
+                } else {
+                    self?.showAlert(message: "Login failed. Check your credentials.")
+                }
+            }
         }
     }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "UHive", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+
 }
