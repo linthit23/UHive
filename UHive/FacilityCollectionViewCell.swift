@@ -21,7 +21,7 @@ class FacilityCollectionViewCell: UICollectionViewCell {
     }
     
     private func style() {
-        iconImageView.tintColor = .primary
+        iconImageView.tintColor = .primaryApp
         contentContainerView.roundCorners(radius: 18, corners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
         
         contentContainerView.layer.shadowColor = UIColor.black.cgColor

@@ -35,7 +35,7 @@ class MainViewController: UITabBarController {
     }
     
     private func style() {
-        tabBar.tintColor = .primary
+        tabBar.tintColor = .primaryApp
         tabBar.backgroundColor = .white
     }
 
