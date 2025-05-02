@@ -8,7 +8,10 @@
 import UIKit
 
 class PaymentsHistoryViewController: UIViewController {
-
+    
+    var paymentReminderId: String!
+    var reminderDetail: PaymentReminderByIdResponse?
+    
     @IBOutlet weak var paymentsHistoryCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -20,6 +23,7 @@ class PaymentsHistoryViewController: UIViewController {
         
         layout()
         style()
+        fetchPaymentReminderDetails()
     }
     
     private func layout() {
@@ -31,6 +35,20 @@ class PaymentsHistoryViewController: UIViewController {
     }
     
     private func style() {}
+    
+    func fetchPaymentReminderDetails() {
+        PaymentService().fetchPaymentReminderById(id: paymentReminderId) { [weak self] reminder in
+            guard let self = self, let reminder = reminder else {
+                print("Failed to fetch reminder details")
+                return
+            }
+            self.reminderDetail = reminder
+            DispatchQueue.main.async {
+                self.paymentsHistoryCollectionView.reloadData()
+            }
+        }
+    }
+
 
 
 }
@@ -45,6 +63,9 @@ extension PaymentsHistoryViewController: UICollectionViewDelegate, UICollectionV
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaymentsHistoryFormCollectionViewCell.reuseIdentifier, for: indexPath) as? PaymentsHistoryFormCollectionViewCell else {
             return UICollectionViewCell()
         }
+        if let reminder = reminderDetail {
+            cell.configure(with: reminder)
+        }
         return cell
     }
     
@@ -54,7 +75,7 @@ extension PaymentsHistoryViewController: UICollectionViewDelegate, UICollectionV
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width-32, height: collectionView.frame.height)
     }
     
     

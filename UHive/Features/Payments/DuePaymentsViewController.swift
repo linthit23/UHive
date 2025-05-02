@@ -8,6 +8,9 @@
 import UIKit
 
 class DuePaymentsViewController: UIViewController {
+    
+    var paymentReminderId: String!
+    var reminderDetail: PaymentReminderByIdResponse?
 
     @IBOutlet weak var duePaymentsCollectionView: UICollectionView!
     
@@ -20,6 +23,7 @@ class DuePaymentsViewController: UIViewController {
         
         layout()
         style()
+        fetchPaymentReminderDetails()
     }
     
     private func layout() {
@@ -31,7 +35,19 @@ class DuePaymentsViewController: UIViewController {
     }
     
     private func style() {}
-
+    
+    func fetchPaymentReminderDetails() {
+        PaymentService().fetchPaymentReminderById(id: paymentReminderId) { [weak self] reminder in
+            guard let self = self, let reminder = reminder else {
+                print("Failed to fetch reminder details")
+                return
+            }
+            self.reminderDetail = reminder
+            DispatchQueue.main.async {
+                self.duePaymentsCollectionView.reloadData()
+            }
+        }
+    }
 
 }
 
@@ -45,6 +61,10 @@ extension DuePaymentsViewController: UICollectionViewDelegate, UICollectionViewD
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DuePaymentsFormCollectionViewCell.reuseIdentifier, for: indexPath) as? DuePaymentsFormCollectionViewCell else {
                 return UICollectionViewCell()
         }
+        cell.delegate = self
+        if let reminder = reminderDetail {
+            cell.configure(with: reminder)
+        }
         return cell
     }
     
@@ -54,9 +74,52 @@ extension DuePaymentsViewController: UICollectionViewDelegate, UICollectionViewD
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
+        return CGSize(width: collectionView.frame.width-32, height: collectionView.frame.height)
     }
     
     
 }
 
+extension DuePaymentsViewController: DuePaymentsFormCollectionViewCellDelegate {
+    
+    func didTapSubmitButton(in cell: DuePaymentsFormCollectionViewCell) {
+        // Show a confirmation alert before submitting
+        let alertController = UIAlertController(
+            title: "Confirm Submission",
+            message: "Are you sure you want to submit?",
+            preferredStyle: .alert
+        )
+        
+        let submitAction = UIAlertAction(title: "Yes", style: .default) { [weak self] _ in
+            cell.submitButton.isEnabled = false
+            cell.submitButton.setTitle("Submitting form...", for: .normal)
+            if let reminder = self?.reminderDetail {
+                PaymentService().submitPaymentReminder(id: reminder.id) { [weak self] success in
+                    DispatchQueue.main.async {
+                        if (success != nil) {
+                            self?.navigationController?.popViewController(animated: true)
+                        } else {
+                            self?.navigationController?.popViewController(animated: true)
+                            self?.showAlert(message: "Submission failed. Please try again later.")
+                        }
+                    }
+                }
+            } else {
+                self?.showAlert(message: "Submission failed. Please try again later.")
+            }
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .destructive, handler: nil)
+        
+        alertController.addAction(submitAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "UHive", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+}

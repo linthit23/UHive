@@ -9,6 +9,9 @@ import UIKit
 
 class NewsDetailViewController: UIViewController {
 
+    var newsId: String!
+    var newsDetail: NewsDetailResponse?
+    
     @IBOutlet weak var newsDetailCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -20,6 +23,7 @@ class NewsDetailViewController: UIViewController {
         
         layout()
         style()
+        fetchNewsDetail()
     }
     
     private func layout() {
@@ -31,6 +35,19 @@ class NewsDetailViewController: UIViewController {
     }
     
     private func style() {}
+    
+    func fetchNewsDetail() {
+        NewsService().fetchNewsById(id: newsId) { [weak self] newsDetail in
+            guard let self = self, let newsDetail = newsDetail else {
+                print("Failed to load news detail")
+                return
+            }
+            self.newsDetail = newsDetail
+            DispatchQueue.main.async {
+                self.newsDetailCollectionView.reloadData()
+            }
+        }
+    }
 
 }
 
@@ -48,6 +65,9 @@ extension NewsDetailViewController: UICollectionViewDelegate, UICollectionViewDa
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsDetailCollectionViewCell.reuseIdentifier, for: indexPath) as? NewsDetailCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            if let detail = newsDetail {
+                cell.configure(with: detail)
+            }
             return cell
         }
         return UICollectionViewCell()
@@ -60,7 +80,7 @@ extension NewsDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == newsDetailCollectionView {
-            return CGSize(width: collectionView.frame.width, height: 400)
+            return CGSize(width: collectionView.frame.width-32, height: 400)
         }
         return .zero
     }

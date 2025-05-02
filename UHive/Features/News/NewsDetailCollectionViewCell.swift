@@ -26,5 +26,13 @@ class NewsDetailCollectionViewCell: UICollectionViewCell {
     private func style() {
         
     }
+    
+    func configure(with detail: NewsDetailResponse) {
+        
+        announcedFromLabel.text = "Announcement from student council"
+        titleLabel.text = detail.content
+        announcedAtLabel.text = "announced at \(detail.createdAt.toDisplayDate() ?? "")"
+        decriptionLabel.text = detail.description
+    }
 
 }

@@ -9,6 +9,8 @@ import UIKit
 
 class NewsViewController: UIViewController {
 
+    private var news: [News] = []
+    
     @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var newsCollectionView: UICollectionView!
     
@@ -25,6 +27,8 @@ class NewsViewController: UIViewController {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissModalVC))
         closeImageView.isUserInteractionEnabled = true
         closeImageView.addGestureRecognizer(tapGesture)
+        
+        fetchNews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,10 +53,25 @@ class NewsViewController: UIViewController {
     
     func openNews(_ indexPath: IndexPath) {
         let newsDetailVC = NewsDetailViewController()
+        newsDetailVC.newsId = self.news[indexPath.row].id
         let backItem = UIBarButtonItem()
         backItem.title = ""
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(newsDetailVC, animated: true)
+    }
+    
+    func fetchNews() {
+        NewsService().fetchAllNews { [weak self]  newsResponse in
+            guard let self = self, let news = newsResponse?.data else {
+                print("Failed to load news")
+                return
+            }
+            self.news = news
+            
+            DispatchQueue.main.async {
+                self.newsCollectionView.reloadData()
+            }
+        }
     }
 
 }
@@ -67,7 +86,7 @@ extension NewsViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == newsCollectionView {
-            return 10
+            return news.count
         }
         return 0
     }
@@ -77,6 +96,8 @@ extension NewsViewController: UICollectionViewDelegate, UICollectionViewDataSour
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.reuseIdentifier, for: indexPath) as? NewsCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let new = news[indexPath.item]
+            cell.configure(with: new)
             return cell
         }
         return UICollectionViewCell()
@@ -84,7 +105,7 @@ extension NewsViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // MARK: - Layout Configuration
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

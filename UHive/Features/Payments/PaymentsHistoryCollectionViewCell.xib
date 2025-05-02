@@ -25,27 +25,28 @@
                                 <rect key="frame" x="16" y="9" width="244" height="55"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="bzT-gI-y2K">
-                                        <rect key="frame" x="0.0" y="0.0" width="115.33333333333333" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="120" height="55"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GEF-bK-1pk">
-                                                <rect key="frame" x="0.0" y="0.0" width="55" height="55"/>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GEF-bK-1pk">
+                                                <rect key="frame" x="0.0" y="0.66666666666666785" width="40" height="53.666666666666657"/>
+                                                <color key="tintColor" name="primaryAppColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="55" id="aNH-gH-sEO"/>
+                                                    <constraint firstAttribute="width" constant="40" id="aNH-gH-sEO"/>
                                                     <constraint firstAttribute="height" constant="55" id="djO-zx-6QS"/>
                                                 </constraints>
                                             </imageView>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="8Vs-q1-YFV">
-                                                <rect key="frame" x="63" y="0.0" width="52.333333333333343" height="55"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="8Vs-q1-YFV">
+                                                <rect key="frame" x="48" y="0.0" width="72" height="55"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="623-md-WPt">
-                                                        <rect key="frame" x="0.0" y="0.0" width="40.666666666666664" height="18.666666666666668"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Successful Payment" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="623-md-WPt">
+                                                        <rect key="frame" x="0.0" y="0.0" width="72" height="20.666666666666668"/>
+                                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ihZ-Q8-s5r">
-                                                        <rect key="frame" x="0.0" y="36.666666666666664" width="35.333333333333336" height="18.333333333333336"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <rect key="frame" x="0.0" y="34.666666666666664" width="31" height="20.333333333333336"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" name="lightGreyColor"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
@@ -53,12 +54,12 @@
                                             </stackView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="MNq-aM-RAt">
-                                        <rect key="frame" x="203.33333333333334" y="0.0" width="40.666666666666657" height="55"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="MNq-aM-RAt">
+                                        <rect key="frame" x="208" y="0.0" width="36" height="55"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybu-oR-u2o">
-                                                <rect key="frame" x="0.0" y="0.0" width="40.666666666666664" height="55"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="36" height="55"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -98,8 +99,12 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="dollarsign.circle" catalog="system" width="128" height="123"/>
         <namedColor name="lightGreyColor">
             <color red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="primaryAppColor">
+            <color red="0.18431372549019609" green="0.6705882352941176" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

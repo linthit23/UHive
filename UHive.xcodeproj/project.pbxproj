@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		188B3DFA2DC3F6B7000155F6 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 188B3DF92DC3F6B7000155F6 /* Alamofire */; };
+		188B3E1B2DC45948000155F6 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 188B3E1A2DC45948000155F6 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				188B3E1B2DC45948000155F6 /* SDWebImage in Frameworks */,
 				188B3DFA2DC3F6B7000155F6 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +86,7 @@
 			name = UHive;
 			packageProductDependencies = (
 				188B3DF92DC3F6B7000155F6 /* Alamofire */,
+				188B3E1A2DC45948000155F6 /* SDWebImage */,
 			);
 			productName = UHive;
 			productReference = 18F197C32DB4F8F000C57509 /* UHive.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				188B3DF82DC3F6B7000155F6 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				188B3E192DC45948000155F6 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 18F197C42DB4F8F000C57509 /* Products */;
@@ -358,6 +362,14 @@
 				minimumVersion = 5.10.2;
 			};
 		};
+		188B3E192DC45948000155F6 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.21.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -365,6 +377,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 188B3DF82DC3F6B7000155F6 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		188B3E1A2DC45948000155F6 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 188B3E192DC45948000155F6 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

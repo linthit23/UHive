@@ -33,5 +33,13 @@ class DuePaymentsCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
     }
+    
+    func configure(with reminder: PaymentReminder) {
+//        titleLabel.text =
+        amountLabel.text = "Amount \(reminder.amount)$"
+        statusLabel.text = reminder.status.capitalizedFirstLetter()
+        statusLabel.textColor = reminder.status.statusColor()
+        dueDateLabel.text = "due by " + (reminder.dueDate.toDisplayDate() ?? "")
+    }
 
 }

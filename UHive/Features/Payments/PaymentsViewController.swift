@@ -13,6 +13,9 @@ class PaymentsViewController: UIViewController {
     @IBOutlet weak var paymentsSegmentedControl: UISegmentedControl!
     @IBOutlet weak var paymentsCollectionView: UICollectionView!
     
+    private var duePayments: [PaymentReminder] = []
+    private var paymentHistory: [PaymentReminder] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,6 +32,8 @@ class PaymentsViewController: UIViewController {
         closeImageView.addGestureRecognizer(tapGesture)
         
         paymentsSegmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
+        
+        fetchPaymentReminders()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,11 +58,12 @@ class PaymentsViewController: UIViewController {
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
         let _ = sender.selectedSegmentIndex
-        paymentsCollectionView.reloadData()
+        fetchPaymentReminders()
     }
     
     func openDuePaymentsVC(_ indexPath: IndexPath) {
         let duePaymentsVC = DuePaymentsViewController()
+        duePaymentsVC.paymentReminderId = self.duePayments[indexPath.row].id
         let backItem = UIBarButtonItem()
         backItem.title = ""
         self.navigationItem.backBarButtonItem = backItem
@@ -66,10 +72,27 @@ class PaymentsViewController: UIViewController {
     
     func openPaymentsHistoryVC(_ indexPath: IndexPath) {
         let paymentsHistoryVC = PaymentsHistoryViewController()
+        paymentsHistoryVC.paymentReminderId = self.paymentHistory[indexPath.row].id
         let backItem = UIBarButtonItem()
         backItem.title = ""
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(paymentsHistoryVC, animated: true)
+    }
+    
+    func fetchPaymentReminders() {
+        PaymentService().fetchAllPaymentReminders { [weak self] paymentReminderResponse in
+            guard let self = self, let paymentReminders = paymentReminderResponse?.data else {
+                print("Failed to load payment reminders")
+                return
+            }
+            
+            self.duePayments = paymentReminders.filter { $0.status == "PENDING" || $0.status == "UNPAID" }
+            self.paymentHistory = paymentReminders.filter { $0.status == "PAID" }
+            
+            DispatchQueue.main.async {
+                self.paymentsCollectionView.reloadData()
+            }
+        }
     }
 
 }
@@ -88,8 +111,8 @@ extension PaymentsViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch paymentsSegmentedControl.selectedSegmentIndex {
-        case 0: return 5
-        case 1: return 5
+        case 0: return duePayments.count
+        case 1: return paymentHistory.count
         default: return 0
         }
     }
@@ -100,11 +123,15 @@ extension PaymentsViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DuePaymentsCollectionViewCell.reuseIdentifier, for: indexPath) as? DuePaymentsCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let reminder = duePayments[indexPath.item]
+            cell.configure(with: reminder)
             return cell
         case 1:
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PaymentsHistoryCollectionViewCell.reuseIdentifier, for: indexPath) as? PaymentsHistoryCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let reminder = paymentHistory[indexPath.item]
+            cell.configure(with: reminder)
             return cell
         default :
             return UICollectionViewCell()

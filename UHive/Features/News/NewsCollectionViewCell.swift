@@ -30,5 +30,10 @@ class NewsCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
     }
+    
+    func configure(with new: News) {
+        titleLabel.text = new.content
+        descriptionLabel.text = new.description
+    }
 
 }

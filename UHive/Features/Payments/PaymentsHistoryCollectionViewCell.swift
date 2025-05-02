@@ -32,5 +32,12 @@ class PaymentsHistoryCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
     }
+    
+    func configure(with reminder: PaymentReminder) {
+//        titleLabel.text =
+        statusLabel.text = reminder.status.capitalizedFirstLetter()
+        statusLabel.textColor = reminder.status.statusColor()
+        processedDateLabel.text = "processed on " + (reminder.updatedAt.toDisplayDate() ?? "")
+    }
 
 }
