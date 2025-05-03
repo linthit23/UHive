@@ -34,4 +34,20 @@ class MyBookingsCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
+    func configure(with booking: FacilityBooking) {
+        switch booking.facility.name {
+        case "Basketball Court":
+            iconImageView.image = UIImage(systemName: "basketball")
+        default: break
+        }
+        facilityNameLabel.text = booking.facility.name
+        if booking.numberOfPeople == 1 {
+            bookedCapacityLabel.text = "\(booking.numberOfPeople) person"
+        } else {
+            bookedCapacityLabel.text = "\(booking.numberOfPeople) persons"
+        }
+        bookingStatusLabel.text = booking.status.capitalizedFirstLetter()
+        bookingStatusLabel.textColor = booking.status.statusColor()
+        bookedDateLabel.text = booking.createdAt.toFormattedDateAndTimeString()
+    }
 }

@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23721"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,9 +21,12 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="EUU-uh-Xee">
+                    <rect key="frame" x="317" y="58.666666666666671" width="60" height="58.666666666666671"/>
+                    <color key="tintColor" name="primaryAppColor"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4gO-nz-Bb8">
                     <rect key="frame" x="317" y="58" width="60" height="60"/>
-                    <color key="backgroundColor" systemColor="systemGreenColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="kut-OR-F5V"/>
                         <constraint firstAttribute="width" constant="60" id="mwa-e8-nFZ"/>
@@ -58,10 +60,14 @@
             <color key="backgroundColor" name="backgroundColor"/>
             <constraints>
                 <constraint firstItem="zgJ-HF-l4j" firstAttribute="top" secondItem="APS-ue-dSU" secondAttribute="bottom" constant="8" symbolic="YES" id="CtI-yV-sVK"/>
+                <constraint firstItem="EUU-uh-Xee" firstAttribute="leading" secondItem="4gO-nz-Bb8" secondAttribute="leading" id="EA7-bL-rUy"/>
                 <constraint firstItem="4gO-nz-Bb8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="58" id="J2f-Ts-Reh"/>
+                <constraint firstItem="EUU-uh-Xee" firstAttribute="bottom" secondItem="4gO-nz-Bb8" secondAttribute="bottom" id="MKZ-nU-cwL"/>
                 <constraint firstItem="APS-ue-dSU" firstAttribute="leading" secondItem="6gU-TT-9cL" secondAttribute="leading" id="Pvl-By-Vap"/>
                 <constraint firstItem="APS-ue-dSU" firstAttribute="top" secondItem="4gO-nz-Bb8" secondAttribute="bottom" constant="8" symbolic="YES" id="TjE-LT-v0W"/>
                 <constraint firstAttribute="trailing" secondItem="4gO-nz-Bb8" secondAttribute="trailing" constant="16" id="X5E-AK-U2P"/>
+                <constraint firstItem="EUU-uh-Xee" firstAttribute="trailing" secondItem="4gO-nz-Bb8" secondAttribute="trailing" id="Xnv-SO-gBX"/>
+                <constraint firstItem="EUU-uh-Xee" firstAttribute="top" secondItem="4gO-nz-Bb8" secondAttribute="top" id="YQL-j1-jIu"/>
                 <constraint firstItem="zgJ-HF-l4j" firstAttribute="bottom" secondItem="6gU-TT-9cL" secondAttribute="bottom" id="YiK-VQ-Mb8"/>
                 <constraint firstItem="zgJ-HF-l4j" firstAttribute="leading" secondItem="6gU-TT-9cL" secondAttribute="leading" id="Yvr-bV-msf"/>
                 <constraint firstItem="6gU-TT-9cL" firstAttribute="trailing" secondItem="APS-ue-dSU" secondAttribute="trailing" id="pmg-o4-GHa"/>
@@ -71,11 +77,12 @@
         </view>
     </objects>
     <resources>
+        <image name="person.crop.circle" catalog="system" width="128" height="123"/>
         <namedColor name="backgroundColor">
             <color red="0.92941176470588238" green="0.98431372549019602" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
+        <namedColor name="primaryAppColor">
+            <color red="0.18431372549019609" green="0.6705882352941176" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

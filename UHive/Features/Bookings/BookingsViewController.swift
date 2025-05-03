@@ -8,10 +8,13 @@
 import UIKit
 
 class BookingsViewController: UIViewController {
-
+    
     @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var bookingsSegmentedControl: UISegmentedControl!
     @IBOutlet weak var bookingsCollectionView: UICollectionView!
+    
+    private var facilities: [Facility] = []
+    private var facilityBookings: [FacilityBooking] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +32,9 @@ class BookingsViewController: UIViewController {
         closeImageView.addGestureRecognizer(tapGesture)
         
         bookingsSegmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
-
+        
+        fetchFacilities()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,12 +58,17 @@ class BookingsViewController: UIViewController {
     }
     
     @objc func segmentChanged(_ sender: UISegmentedControl) {
-        let _ = sender.selectedSegmentIndex
-        bookingsCollectionView.reloadData()
+        let index = sender.selectedSegmentIndex
+        switch index {
+        case 0: fetchFacilities()
+        case 1: fetchFacilityBookings()
+        default: break
+        }
     }
     
     func openFacility(_ indexPath: IndexPath) {
         let facilityBookingVC = FacilityBookingViewController()
+        facilityBookingVC.facility = facilities[indexPath.row]
         let backItem = UIBarButtonItem()
         backItem.title = ""
         self.navigationItem.backBarButtonItem = backItem
@@ -67,10 +77,41 @@ class BookingsViewController: UIViewController {
     
     func openMyBookings(_ indexPath: IndexPath) {
         let bookedFacilityVC = BookedFacilityViewController()
+        bookedFacilityVC.booking = self.facilityBookings[indexPath.row]
         let backItem = UIBarButtonItem()
         backItem.title = ""
         self.navigationItem.backBarButtonItem = backItem
         self.navigationController?.pushViewController(bookedFacilityVC, animated: true)
+    }
+    
+    func fetchFacilities() {
+        BookingsService().fetchAllFacilities { [weak self] facilitiesResponse in
+            guard let self = self, let facilities = facilitiesResponse?.data else {
+                print("Failed to load facilities")
+                return
+            }
+            
+            self.facilities = facilities
+            
+            DispatchQueue.main.async {
+                self.bookingsCollectionView.reloadData()
+            }
+        }
+    }
+    
+    func fetchFacilityBookings() {
+        BookingsService().fetchAllBookings { [weak self] facilityBookingsResponse in
+            guard let self = self, let bookings = facilityBookingsResponse?.data else {
+                print("Failed to load bookings")
+                return
+            }
+            
+            self.facilityBookings = bookings
+            
+            DispatchQueue.main.async {
+                self.bookingsCollectionView.reloadData()
+            }
+        }
     }
 
 }
@@ -93,9 +134,9 @@ extension BookingsViewController: UICollectionViewDelegate, UICollectionViewData
         if collectionView == bookingsCollectionView {
             switch bookingsSegmentedControl.selectedSegmentIndex {
             case 0:
-                return 5
+                return self.facilities.count
             case 1:
-                return 10
+                return self.facilityBookings.count
             default: return 0
             }
         }
@@ -109,11 +150,15 @@ extension BookingsViewController: UICollectionViewDelegate, UICollectionViewData
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FacilityCollectionViewCell.reuseIdentifier, for: indexPath) as? FacilityCollectionViewCell else {
                     return UICollectionViewCell()
                 }
+                let facility = facilities[indexPath.item]
+                cell.configure(with: facility)
                 return cell
             case 1:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyBookingsCollectionViewCell.reuseIdentifier, for: indexPath) as? MyBookingsCollectionViewCell else {
                     return UICollectionViewCell()
                 }
+                let booking = facilityBookings[indexPath.item]
+                cell.configure(with: booking)
                 return cell
             default: return UICollectionViewCell()
             }
@@ -127,7 +172,7 @@ extension BookingsViewController: UICollectionViewDelegate, UICollectionViewData
         case 0:
             return UIEdgeInsets(top: 16, left: 10, bottom: 16, right: 10)
         case 1:
-            return UIEdgeInsets(top: 16, left: 0, bottom: 16, right: 0)
+            return UIEdgeInsets(top: 16, left: 10, bottom: 16, right: 10)
         default: return UIEdgeInsets()
         }
     }

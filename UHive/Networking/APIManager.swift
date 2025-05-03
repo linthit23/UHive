@@ -20,6 +20,9 @@ enum APIManager {
         case submitPayment(String)
         case news
         case newsById(String)
+        case facilities
+        case bookings
+        case bookFacility(String)
         
         var path: String {
             switch self {
@@ -37,6 +40,12 @@ enum APIManager {
                 return "/alerts"
             case .newsById(let id):
                 return "/alerts/\(id)"
+            case .facilities:
+                return "/facilities"
+            case .bookings:
+                return "/facilities/bookings"
+            case .bookFacility(let id):
+                return "/facilities/\(id)/book"
             }
         }
     }
@@ -99,5 +108,37 @@ enum APIManager {
         let url = makeURL(for: .newsById(id))
         let headers = AuthManager.shared.authHeaders()
         return (url, .get, headers)
+    }
+    
+    static func facilitiesRequest() -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .facilities)
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .get, headers)
+    }
+    
+    static func bookingsRequest() -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .bookings)
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .get, headers)
+    }
+    
+    static func bookFacility(
+        id: String,
+        date: String,
+        start: String,
+        end: String,
+        numberOfPeople: Int,
+        reason: String
+    ) -> (url: String, method: HTTPMethod, parameters: Parameters, headers: HTTPHeaders) {
+        let url = makeURL(for: .bookFacility(id))
+        let parameters: Parameters = [
+            "date": date,
+            "start": start,
+            "end": end,
+            "number_of_people": numberOfPeople,
+            "reason": reason
+        ]
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .post, parameters, headers)
     }
 }

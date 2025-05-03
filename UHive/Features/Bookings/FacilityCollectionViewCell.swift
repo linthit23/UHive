@@ -32,4 +32,12 @@ class FacilityCollectionViewCell: UICollectionViewCell {
         layer.masksToBounds = false
     }
 
+    func configure(with facility: Facility) {
+        switch facility.name {
+        case "Basketball Court":
+            iconImageView.image = UIImage(systemName: "basketball")
+        default: break
+        }
+        titleLabel.text = facility.name
+    }
 }

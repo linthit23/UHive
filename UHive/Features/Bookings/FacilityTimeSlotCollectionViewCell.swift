@@ -14,6 +14,13 @@ class FacilityTimeSlotCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var timeLabel: UILabel!
     
+    override var isSelected: Bool {
+        didSet {
+            contentContainerView.backgroundColor = isSelected ? UIColor.primaryColor : UIColor.white
+            timeLabel.textColor = isSelected ? UIColor.white : UIColor.black
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         style()
@@ -27,6 +34,10 @@ class FacilityTimeSlotCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.shadowRadius = 1
         contentContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
+    }
+    
+    func configure(with availablehour: AvailableHour) {
+        timeLabel.text = availablehour.start.toHourMinute()
     }
 
 }

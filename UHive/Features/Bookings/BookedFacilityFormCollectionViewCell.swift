@@ -30,5 +30,19 @@ class BookedFacilityFormCollectionViewCell: UICollectionViewCell {
         facilityBookingCancelButton.addDropShadow()
         facilityBookingCancelButton.tintColor = .white
     }
+    
+    func configure(with booking: FacilityBooking) {
+        facilityNameLabel.text = booking.facility.name
+        facilityBookingDateLabel.text = booking.start.toDisplayDate()
+        facilityBookingTimeSlotLabel.text = "\(booking.start.toHourMinute() ?? "") - \(booking.end.toHourMinute() ?? "")"
+        if booking.numberOfPeople == 1 {
+            facilityBookingNumberOfPeopleLabel.text = "\(booking.numberOfPeople) person"
+        } else {
+            facilityBookingNumberOfPeopleLabel.text = "\(booking.numberOfPeople) persons"
+        }
+        facilityBookingStatusLabel.text = booking.status.capitalizedFirstLetter()
+        facilityBookingStatusLabel.textColor = booking.status.statusColor()
+        facilityBookingReasonForUseLabel.text = booking.reason
+    }
 
 }
