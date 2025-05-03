@@ -25,7 +25,7 @@ class MainViewController: UITabBarController {
         profileVC.tabBarItem = UITabBarItem(title: "Classes", image: UIImage(systemName: "graduationcap"), tag: 1)
         
         let settingsVC = HomeworkViewController()
-        settingsVC.tabBarItem = UITabBarItem(title: "Homework", image: UIImage(systemName: "book.closed"), tag: 2)
+        settingsVC.tabBarItem = UITabBarItem(title: "Alerts", image: UIImage(systemName: "book.closed"), tag: 2)
         
         let homeNav = UINavigationController(rootViewController: homeVC)
         let profileNav = UINavigationController(rootViewController: profileVC)

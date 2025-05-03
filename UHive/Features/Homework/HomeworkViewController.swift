@@ -9,6 +9,8 @@ import UIKit
 
 class HomeworkViewController: UIViewController {
     
+    private var tests: [Test] = []
+    
     @IBOutlet weak var alertCollectionView: UICollectionView!
     @IBOutlet weak var alertViewAllLabel: UILabel!
     @IBOutlet weak var homeworkCollectionView: UICollectionView!
@@ -35,6 +37,8 @@ class HomeworkViewController: UIViewController {
         let homeworkViewAllTapGesture = UITapGestureRecognizer(target: self, action: #selector(openHomework))
         homeWorkViewAllLabel.isUserInteractionEnabled = true
         homeWorkViewAllLabel.addGestureRecognizer(homeworkViewAllTapGesture)
+        
+        fetchTests()
     }
     
     private func layout() {
@@ -48,6 +52,7 @@ class HomeworkViewController: UIViewController {
     
     @objc func openAlert() {
         let allAlertVC = AllAlertViewController()
+        allAlertVC.tests = tests
         allAlertVC.modalPresentationStyle = .pageSheet
         allAlertVC.isModalInPresentation = true
         self.present(allAlertVC, animated: true)
@@ -59,6 +64,20 @@ class HomeworkViewController: UIViewController {
         allHomeworkVC.isModalInPresentation = true
         self.present(allHomeworkVC, animated: true)
     }
+    
+    func fetchTests() {
+        AlertsService().fetchAllTests { [weak self] testResponse in
+            guard let self = self, let tests = testResponse?.data else {
+                print("Failed to load tests")
+                return
+            }
+            self.tests = tests
+            
+            DispatchQueue.main.async {
+                self.alertCollectionView.reloadData()
+            }
+        }
+    }
 
 }
 
@@ -66,7 +85,7 @@ extension HomeworkViewController: UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == alertCollectionView {
-            return 2
+            return tests.count
         } else if collectionView == homeworkCollectionView {
             return 3
         }
@@ -78,6 +97,8 @@ extension HomeworkViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlertCollectionViewCell.reuseIdentifier, for: indexPath) as? AlertCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let test = tests[indexPath.item]
+            cell.configure(with: test)
             return cell
         } else if collectionView == homeworkCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HomeworkCollectionViewCell.reuseIdentifier, for: indexPath) as? HomeworkCollectionViewCell else {

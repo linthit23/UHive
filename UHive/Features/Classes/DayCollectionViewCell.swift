@@ -16,6 +16,14 @@ class DayCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var dayLabel: UILabel!
     
+    override var isSelected: Bool {
+        didSet {
+            dateContainerView.backgroundColor = isSelected ? UIColor.primaryColor : UIColor.white
+            dateLabel.textColor = isSelected ? UIColor.white : UIColor.black
+            dayLabel.textColor = isSelected ? UIColor.black : UIColor.white
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         style()
@@ -29,6 +37,16 @@ class DayCollectionViewCell: UICollectionViewCell {
         dateContainerView.layer.shadowRadius = 1
         dateContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
+    }
+    
+    func configure(with date: Date) {
+        let dayNumberFormatter = DateFormatter()
+        dayNumberFormatter.dateFormat = "d" // e.g., "10"
+        dateLabel.text = dayNumberFormatter.string(from: date)
+        
+        let dayNameFormatter = DateFormatter()
+        dayNameFormatter.dateFormat = "E" // e.g., "Tue"
+        dayLabel.text = dayNameFormatter.string(from: date)
     }
 
 }

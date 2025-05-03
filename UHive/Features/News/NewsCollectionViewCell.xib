@@ -25,14 +25,14 @@
                                 <rect key="frame" x="16" y="16" width="253" height="76"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tyW-dJ-Vyw">
-                                        <rect key="frame" x="0.0" y="0.0" width="58.333333333333336" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="24"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="53.666666666666664" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="22"/>
                                         <color key="textColor" name="primaryColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWT-nm-Rjd">
-                                        <rect key="frame" x="0.0" y="42" width="39.666666666666664" height="34"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <rect key="frame" x="0.0" y="42" width="35.333333333333336" height="34"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" name="greyColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>

@@ -23,6 +23,8 @@ enum APIManager {
         case facilities
         case bookings
         case bookFacility(String)
+        case tests
+        case classes
         
         var path: String {
             switch self {
@@ -46,6 +48,10 @@ enum APIManager {
                 return "/facilities/bookings"
             case .bookFacility(let id):
                 return "/facilities/\(id)/book"
+            case .tests:
+                return "/homeworks"
+            case .classes:
+                return "/classes?limit=100"
             }
         }
     }
@@ -140,5 +146,17 @@ enum APIManager {
         ]
         let headers = AuthManager.shared.authHeaders()
         return (url, .post, parameters, headers)
+    }
+    
+    static func testsRequest() -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .tests)
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .get, headers)
+    }
+    
+    static func classesRequest() -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .classes)
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .get, headers)
     }
 }

@@ -33,5 +33,85 @@ class AlertCollectionViewCell: UICollectionViewCell {
         contentContainerView.layer.masksToBounds = false
         layer.masksToBounds = false
     }
+    
+    func configure(with test: Test) {
+        alertNameLabel.text = test.content
+        dueDateLabel.text = test.dueDate.toFormattedDateAndTimeString()
+        switch test.content {
+        case "Mathematics Final Exam":
+            alertTypeLabel.text = "Written, cumulative"
+        case "Computer Science Coding Test":
+            alertTypeLabel.text = "Practical programming"
+        case "Biology Lab Practical Test":
+            alertTypeLabel.text = "Hands-on lab work"
+        case "History Eassy Test":
+            alertTypeLabel.text = "Critical writing"
+        case "Psychology Multiple-Choice Test":
+            alertTypeLabel.text = "Theory-based MCQs"
+        case "Mechanical Design Test":
+            alertTypeLabel.text = "Project-based assessment"
+        default: alertTypeLabel.text = "-"
+        }
+        
+        if isFutureDate(test.dueDate) {
+            countDownNumberLabel.isHidden = false
+            countDownHoursLabel.isHidden = false
+            if let dayDiff = daysBetweenTodayAnd(test.dueDate) {
+                countDownNumberLabel.text = "\(dayDiff)"
+                if dayDiff > 1 {
+                    countDownHoursLabel.text = "days left"
+                } else {
+                    countDownHoursLabel.text = "day left"
+                }
+                switch dayDiff {
+                case 0:
+                    countDownNumberLabel.textColor = .gray
+                    countDownHoursLabel.textColor = .gray
+                case 1:
+                    countDownNumberLabel.textColor = .red
+                    countDownHoursLabel.textColor = .red
+                case 2:
+                    countDownNumberLabel.textColor = .orange
+                    countDownHoursLabel.textColor = .orange
+                default:
+                    countDownNumberLabel.textColor = .systemGreen
+                    countDownHoursLabel.textColor = .systemGreen
+                }
+            }
+        } else {
+            alertNameLabel.alpha = 0.3
+            alertTypeLabel.alpha = 0.3
+            dueDateLabel.alpha = 0.3
+            countDownHoursLabel.isHidden = true
+            countDownNumberLabel.isHidden = true
+        }
+    }
+    
+    func isFutureDate(_ isoDateString: String) -> Bool {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        if let date = dateFormatter.date(from: isoDateString) {
+            return date > Date()
+        }
+        return false
+    }
+    
+    func daysBetweenTodayAnd(_ isoDateString: String) -> Int? {
+        let dateFormatter = ISO8601DateFormatter()
+        dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let inputDate = dateFormatter.date(from: isoDateString) else {
+            return nil // Invalid date string
+        }
+        
+        let calendar = Calendar.current
+        let startOfToday = calendar.startOfDay(for: Date())
+        let startOfInputDate = calendar.startOfDay(for: inputDate)
+        
+        let components = calendar.dateComponents([.day], from: startOfToday, to: startOfInputDate)
+        return components.day
+    }
+
 
 }

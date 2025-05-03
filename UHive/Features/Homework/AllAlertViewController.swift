@@ -9,6 +9,8 @@ import UIKit
 
 class AllAlertViewController: UIViewController {
     
+    var tests: [Test]!
+    
     @IBOutlet weak var closeImageView: UIImageView!
     @IBOutlet weak var alertsCollectionView: UICollectionView!
 
@@ -52,8 +54,8 @@ class AllAlertViewController: UIViewController {
 extension AllAlertViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == alertsCollectionView {
-            return 10
+        if let tests = tests {
+            return tests.count
         }
         return 0
     }
@@ -63,6 +65,8 @@ extension AllAlertViewController: UICollectionViewDelegate, UICollectionViewData
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AlertCollectionViewCell.reuseIdentifier, for: indexPath) as? AlertCollectionViewCell else {
                 return UICollectionViewCell()
             }
+            let test = tests[indexPath.item]
+            cell.configure(with: test)
             return cell
         }
         return UICollectionViewCell()

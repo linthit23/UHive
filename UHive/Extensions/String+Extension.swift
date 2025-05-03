@@ -68,4 +68,21 @@ extension String {
         
         return formatter.string(from: date)
     }
+    
+    func toTimeString() -> String? {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let date = isoFormatter.date(from: self) else {
+            return nil
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "h:mm a" // e.g., "11:00 PM"
+        formatter.locale = Locale.current
+        formatter.timeZone = TimeZone.current
+        
+        return formatter.string(from: date)
+    }
+
 }

@@ -49,8 +49,8 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5W-wG-WZM">
-                    <rect key="frame" x="49" y="374" width="53" height="28"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                    <rect key="frame" x="40" y="382" width="45" height="23"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -73,8 +73,8 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="jadensmith23@gmail.com" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="acv-hW-3fX">
-                    <rect key="frame" x="49.000000000000014" y="403.33333333333331" width="225.33333333333337" height="23"/>
-                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                    <rect key="frame" x="40" y="410.66666666666669" width="182" height="18"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                     <color key="textColor" name="primaryColor"/>
                     <nil key="highlightedColor"/>
                 </label>
@@ -82,17 +82,17 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="acv-hW-3fX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="49" id="6y3-uz-Vif"/>
+                <constraint firstItem="acv-hW-3fX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="6y3-uz-Vif"/>
                 <constraint firstItem="G9D-YE-zuW" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GHt-M5-4Sb"/>
                 <constraint firstItem="ZuY-sC-QzL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="GZy-4u-kfp"/>
                 <constraint firstItem="5NY-H3-dY3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="Nup-VW-0NE"/>
-                <constraint firstItem="j5W-wG-WZM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="49" id="VCk-sv-xGm"/>
+                <constraint firstItem="j5W-wG-WZM" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="40" id="VCk-sv-xGm"/>
                 <constraint firstAttribute="bottom" secondItem="ZuY-sC-QzL" secondAttribute="bottom" constant="90" id="VhM-tY-tMN"/>
                 <constraint firstItem="6su-Ll-fyy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="WBI-xE-hOQ"/>
                 <constraint firstItem="pof-1K-isc" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="joL-KS-VWD"/>
                 <constraint firstItem="G9D-YE-zuW" firstAttribute="firstBaseline" secondItem="6su-Ll-fyy" secondAttribute="baseline" constant="19" symbolType="layoutAnchor" id="mQp-SA-ftc"/>
                 <constraint firstItem="5NY-H3-dY3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="n7D-G4-UCg"/>
-                <constraint firstItem="j5W-wG-WZM" firstAttribute="top" secondItem="G9D-YE-zuW" secondAttribute="bottom" constant="24" id="oEf-my-8uJ"/>
+                <constraint firstItem="j5W-wG-WZM" firstAttribute="top" secondItem="G9D-YE-zuW" secondAttribute="bottom" constant="32" id="oEf-my-8uJ"/>
                 <constraint firstItem="6su-Ll-fyy" firstAttribute="top" secondItem="pof-1K-isc" secondAttribute="bottom" constant="8" symbolic="YES" id="sUL-FV-coD"/>
                 <constraint firstItem="pof-1K-isc" firstAttribute="top" secondItem="5NY-H3-dY3" secondAttribute="bottom" constant="8" symbolic="YES" id="uUv-80-VVg"/>
                 <constraint firstItem="acv-hW-3fX" firstAttribute="firstBaseline" secondItem="j5W-wG-WZM" secondAttribute="baseline" constant="25" id="ygH-8f-BsX"/>

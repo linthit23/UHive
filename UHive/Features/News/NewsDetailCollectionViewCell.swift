@@ -28,10 +28,9 @@ class NewsDetailCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with detail: NewsDetailResponse) {
-        
         announcedFromLabel.text = "Announcement from student council"
         titleLabel.text = detail.content
-        announcedAtLabel.text = "announced at \(detail.createdAt.toDisplayDate() ?? "")"
+        announcedAtLabel.text = "announced at \(detail.createdAt.toFormattedDateAndTimeString() ?? "")"
         decriptionLabel.text = detail.description
     }
 
