@@ -12,7 +12,11 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var featureCollectionView: UICollectionView!
     @IBOutlet weak var feedCollectionView: UICollectionView!
+    @IBOutlet weak var boxHeightConstraint: NSLayoutConstraint!
     
+    private var lastContentOffset: CGFloat = 0
+    private let originalBoxHeight: CGFloat = 128 // or whatever the original height is
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -161,9 +165,36 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
             let itemWidth = (collectionView.frame.width - totalSpacing) / itemsPerRow
             return CGSize(width: itemWidth, height: 120)
         } else if collectionView == feedCollectionView {
-            return CGSize(width: collectionView.frame.width, height: 170)
+            return CGSize(width: collectionView.frame.width, height: 220)
         }
         return CGSize.zero
     }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView == feedCollectionView else { return }
+        
+        let currentOffset = scrollView.contentOffset.y
+        
+        if currentOffset > lastContentOffset {
+            // Scrolling up — collapse
+            if boxHeightConstraint.constant != 0 {
+                boxHeightConstraint.constant = 0
+                UIView.animate(withDuration: 0.4) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        } else if currentOffset < lastContentOffset {
+            // Scrolling down — expand
+            if boxHeightConstraint.constant == 0 {
+                boxHeightConstraint.constant = originalBoxHeight
+                UIView.animate(withDuration: 0.4) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+        
+        lastContentOffset = currentOffset
+    }
+
     
 }
