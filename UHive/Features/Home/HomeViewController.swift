@@ -116,6 +116,9 @@ class HomeViewController: UIViewController {
         postVC.post = post
         postVC.modalPresentationStyle = .pageSheet
         postVC.isModalInPresentation = true
+        postVC.onUpdate = { [weak self] in
+            self?.fetchPosts()
+        }
         let postNav = UINavigationController(rootViewController: postVC)
         postNav.navigationBar.tintColor = .black
         self.present(postNav, animated: true)

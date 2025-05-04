@@ -13,6 +13,7 @@ class PostViewController: UIViewController {
     var postById: PostByIdResponse?
     var isComment: Bool!
     var nameForPost: String!
+    var onUpdate: (() -> Void)?
     
     @IBOutlet weak var postCollectionView: UICollectionView!
     @IBOutlet weak var closeImageView: UIImageView!
@@ -127,6 +128,7 @@ class PostViewController: UIViewController {
                 return
             }
             cell.configure(with: postById!, post: .init(id: post.id, content: post.content, user: self.post.user, likes: post.likes, comments: post.comments, createdAt: postById!.createdAt, updatedAt: postById!.updatedAt))
+            self.onUpdate?()
         }
     }
     
@@ -137,6 +139,7 @@ class PostViewController: UIViewController {
                 return
             }
             cell.configure(with: postById!, post: .init(id: post.id, content: post.content, user: self.post.user, likes: post.likes, comments: post.comments, createdAt: postById!.createdAt, updatedAt: postById!.updatedAt))
+            self.onUpdate?()
         }
     }
     

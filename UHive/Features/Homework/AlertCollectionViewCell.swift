@@ -79,11 +79,10 @@ class AlertCollectionViewCell: UICollectionViewCell {
                 }
             }
         } else {
-            alertNameLabel.alpha = 0.3
-            alertTypeLabel.alpha = 0.3
-            dueDateLabel.alpha = 0.3
-            countDownHoursLabel.isHidden = true
-            countDownNumberLabel.isHidden = true
+            countDownNumberLabel.textColor = .primaryApp
+            countDownHoursLabel.textColor = .primaryApp
+            countDownHoursLabel.text = "/100"
+            countDownNumberLabel.text = "75"
         }
     }
     
