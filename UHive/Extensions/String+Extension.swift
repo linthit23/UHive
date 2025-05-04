@@ -84,5 +84,26 @@ extension String {
         
         return formatter.string(from: date)
     }
+    
+    func timeAgoSinceISODate() -> String {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let date = formatter.date(from: self) else {
+            return "Invalid date"
+        }
+        
+        let secondsAgo = Int(Date().timeIntervalSince(date))
+        
+        if secondsAgo < 60 {
+            return "\(secondsAgo)s ago"
+        } else if secondsAgo < 3600 {
+            return "\(secondsAgo / 60)m ago"
+        } else if secondsAgo < 86400 {
+            return "\(secondsAgo / 3600)h ago"
+        } else {
+            return "\(secondsAgo / 86400)d ago"
+        }
+    }
 
 }

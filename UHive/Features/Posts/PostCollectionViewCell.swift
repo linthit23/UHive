@@ -1,19 +1,19 @@
 //
-//  FeedCollectionViewCell.swift
+//  PostCollectionViewCell.swift
 //  UHive
 //
-//  Created by Lin Thit on 4/24/25.
+//  Created by Lin Thit on 5/4/25.
 //
 
 import UIKit
 
-class FeedCollectionViewCell: UICollectionViewCell {
+class PostCollectionViewCell: UICollectionViewCell {
+
+    weak var delegate: PostCollectionViewCellDelegate?
     
-    weak var delegate: FeedCollectionViewCellDelegate?
+    static let reuseIdentifier: String = String(describing: PostCollectionViewCell.self)
     
-    static let reuseIdentifier: String = String(describing: FeedCollectionViewCell.self)
-    
-    var post: Post!
+    var id: String!
     
     @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var avatarImageView: UIImageView!
@@ -25,12 +25,12 @@ class FeedCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var likeLabel: UILabel!
     @IBOutlet weak var commentImageView: UIImageView!
     @IBOutlet weak var commentLabel: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         avatarImageView.roundCorners(radius: 20, corners: [.layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner])
-        
+        contentContainerView.roundCorners(radius: 16, corners: [.layerMaxXMaxYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner, .layerMaxXMinYCorner])
+
         let tapGestureForLike = UITapGestureRecognizer(target: self, action: #selector(likePost))
         likeImageView.isUserInteractionEnabled = true
         likeImageView.addGestureRecognizer(tapGestureForLike)
@@ -40,14 +40,11 @@ class FeedCollectionViewCell: UICollectionViewCell {
         commentImageView.addGestureRecognizer(tapGestureForComment)
         commentLabel.isUserInteractionEnabled = true
         commentLabel.addGestureRecognizer(tapGestureForComment)
-        
-        let tapGestureForPost = UITapGestureRecognizer(target: self, action: #selector(viewPost))
-        postLabel.isUserInteractionEnabled = true
-        postLabel.addGestureRecognizer(tapGestureForPost)
+
     }
     
-    func configure(with post: Post) {
-        self.post = post
+    func configure(with postById: PostByIdResponse, post: Post) {
+        self.id = postById.id
         nameLabel.text = post.user.name
         userNameLabel.text = "@\(post.user.name.lowercased().replacingOccurrences(of: " ", with: ""))"
         postedTimeLabel.text = post.createdAt.timeAgoSinceISODate()
@@ -66,11 +63,6 @@ class FeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func containsID<T: Equatable>(in array: [T], targetID: T) -> Bool {
-        return array.contains(targetID)
-    }
-
-    
     @objc func likePost() {
         self.delegate?.didTapLikeButton(in: self)
     }
@@ -79,13 +71,13 @@ class FeedCollectionViewCell: UICollectionViewCell {
         self.delegate?.didTapCommentButton(in: self)
     }
     
-    @objc func viewPost() {
-        self.delegate?.didTapPostLabel(in: self)
+    func containsID<T: Equatable>(in array: [T], targetID: T) -> Bool {
+        return array.contains(targetID)
     }
+
 }
 
-protocol FeedCollectionViewCellDelegate: AnyObject {
-    func didTapLikeButton(in cell: FeedCollectionViewCell)
-    func didTapCommentButton(in cell: FeedCollectionViewCell)
-    func didTapPostLabel(in cell: FeedCollectionViewCell)
+protocol PostCollectionViewCellDelegate: AnyObject {
+    func didTapLikeButton(in cell: PostCollectionViewCell)
+    func didTapCommentButton(in cell: PostCollectionViewCell)
 }

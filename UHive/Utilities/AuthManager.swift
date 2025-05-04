@@ -35,4 +35,10 @@ class AuthManager {
         }
         return headers
     }
+    
+    func refreshToken() {
+        if let profile = ProfileResponse.loadFromCache() {
+            LoginService().login(email: profile.email, password: profile.password) { _ in }
+        }
+    }
 }

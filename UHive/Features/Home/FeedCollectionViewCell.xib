@@ -103,7 +103,7 @@
                             <constraint firstAttribute="bottom" secondItem="2ec-O4-PNz" secondAttribute="bottom" constant="16" id="aHb-fP-YZb"/>
                             <constraint firstItem="554-cB-pxq" firstAttribute="centerY" secondItem="2ec-O4-PNz" secondAttribute="centerY" id="eiE-oR-62W"/>
                             <constraint firstItem="vSC-c2-4Dd" firstAttribute="centerY" secondItem="554-cB-pxq" secondAttribute="centerY" id="gXO-KP-tzF"/>
-                            <constraint firstItem="554-cB-pxq" firstAttribute="leading" secondItem="9RC-iZ-7tz" secondAttribute="trailing" constant="32" id="hwN-KV-QAX"/>
+                            <constraint firstItem="554-cB-pxq" firstAttribute="leading" secondItem="vG8-0O-BXu" secondAttribute="leading" constant="100" id="hwN-KV-QAX"/>
                             <constraint firstItem="ucW-X1-joO" firstAttribute="leading" secondItem="vG8-0O-BXu" secondAttribute="leading" constant="16" id="iQz-Y7-yuw"/>
                             <constraint firstItem="i89-Xz-c6h" firstAttribute="centerY" secondItem="X6A-LJ-lnK" secondAttribute="centerY" id="mlf-oQ-E27"/>
                             <constraint firstItem="vSC-c2-4Dd" firstAttribute="leading" secondItem="554-cB-pxq" secondAttribute="trailing" constant="4" id="oLf-vm-hFq"/>
@@ -123,8 +123,10 @@
             <connections>
                 <outlet property="avatarImageView" destination="Cnj-Eh-aBs" id="lQu-4c-G94"/>
                 <outlet property="commentImageView" destination="554-cB-pxq" id="hcQ-zI-dk1"/>
+                <outlet property="commentLabel" destination="vSC-c2-4Dd" id="f5K-8Q-hdX"/>
                 <outlet property="contentContainerView" destination="vG8-0O-BXu" id="rKa-cO-fRd"/>
                 <outlet property="likeImageView" destination="2ec-O4-PNz" id="a6b-tR-5Qh"/>
+                <outlet property="likeLabel" destination="9RC-iZ-7tz" id="OV8-fP-vd3"/>
                 <outlet property="nameLabel" destination="X6A-LJ-lnK" id="rde-SZ-DTE"/>
                 <outlet property="postLabel" destination="ucW-X1-joO" id="VDk-HF-nuN"/>
                 <outlet property="postedTimeLabel" destination="bgI-qN-zA4" id="Dd4-VA-cw5"/>

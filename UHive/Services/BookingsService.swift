@@ -52,7 +52,6 @@ class BookingsService {
     
     func bookFacility(id: String, date: String, start: String, end: String, numberOfPeople: Int, reason: String, completion: @escaping (BookedFacilityResponse?) -> Void) {
         let request = APIManager.bookFacility(id: id, date: date, start: start, end: end, numberOfPeople: numberOfPeople, reason: reason)
-        print(request.parameters)
         NetworkManager.shared.request(
             request.url,
             method: request.method,

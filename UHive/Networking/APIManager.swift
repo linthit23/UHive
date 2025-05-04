@@ -26,6 +26,10 @@ enum APIManager {
         case tests
         case classes
         case posts
+        case postById(String)
+        case commentOnPost(String)
+        case likeOnPost(String)
+        case unlikeOnPost(String)
         
         var path: String {
             switch self {
@@ -55,6 +59,14 @@ enum APIManager {
                 return "/classes?limit=100"
             case .posts:
                 return "/posts?limit=100"
+            case .postById(let id):
+                return "/posts/\(id)"
+            case .commentOnPost(let id):
+                return "/posts/\(id)/comment"
+            case .likeOnPost(let id):
+                return "/posts/\(id)/like"
+            case .unlikeOnPost(let id):
+                return "/posts/\(id)/unlike"
             }
         }
     }
@@ -167,5 +179,32 @@ enum APIManager {
         let url = makeURL(for: .posts)
         let headers = AuthManager.shared.authHeaders()
         return (url, .get, headers)
+    }
+    
+    static func postsByIdRequest(id: String) -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .postById(id))
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .get, headers)
+    }
+    
+    static func commentOnPostRequest(id: String, content: String) -> (url: String, method: HTTPMethod, parameters: Parameters, headers: HTTPHeaders) {
+        let url = makeURL(for: .commentOnPost(id))
+        let parameters: Parameters = [
+            "content": content
+        ]
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .post, parameters, headers)
+    }
+    
+    static func likeOnPostRequest(id: String) -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .likeOnPost(id))
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .post, headers)
+    }
+    
+    static func unlikeOnPostRequest(id: String) -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .unlikeOnPost(id))
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .post, headers)
     }
 }

@@ -14,6 +14,7 @@ class MainViewController: UITabBarController {
         
         style()
         setupTabs()
+        refreshAuth()
     }
 
 
@@ -38,5 +39,19 @@ class MainViewController: UITabBarController {
         tabBar.tintColor = .primaryApp
         tabBar.backgroundColor = .white
     }
-
+    
+    private func fetchAndCacheProfile() {
+        ProfileService().fetchProfile { [weak self] profile in
+            guard let _ = self, let profile = profile else {
+                print("Failed to load profile")
+                return
+            }
+            profile.saveToCache()
+        }
+    }
+    
+    private func refreshAuth() {
+        AuthManager.shared.refreshToken()
+        fetchAndCacheProfile()
+    }
 }

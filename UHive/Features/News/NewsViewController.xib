@@ -44,8 +44,10 @@
             <constraints>
                 <constraint firstItem="Gch-ci-7rz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="1Sl-86-nt2"/>
                 <constraint firstAttribute="bottom" secondItem="g09-xl-ekY" secondAttribute="bottom" id="3g6-8l-fil"/>
+                <constraint firstItem="Gch-ci-7rz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="WJQ-EL-DFL"/>
                 <constraint firstItem="g09-xl-ekY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kh6-WZ-E3o"/>
                 <constraint firstItem="g09-xl-ekY" firstAttribute="top" secondItem="Gch-ci-7rz" secondAttribute="bottom" id="mym-pS-ao8"/>
+                <constraint firstItem="Gch-ci-7rz" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="16" id="r6x-lL-YqY"/>
                 <constraint firstItem="Gch-ci-7rz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="8" id="wzL-xe-l5h"/>
                 <constraint firstItem="g09-xl-ekY" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="xaa-G8-4LV"/>
             </constraints>
