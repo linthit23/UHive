@@ -78,7 +78,11 @@ class FacilityBookingFormCollectionViewCell: UICollectionViewCell, UITextFieldDe
             facilityPictureImageView.image = UIImage(systemName: "paintpalette.fill")
         default: break
         }
-        facilityNameLabel.text = facility.name
+        if facility.name == "Art & Design Studio" {
+            facilityNameLabel.text = "Art Studio"
+        } else {
+            facilityNameLabel.text = facility.name
+        }
         // Set to one day ahead of now
         if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {
             facilityBookingDateDatePicker.date = tomorrow

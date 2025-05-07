@@ -33,6 +33,10 @@ extension String {
             return .red
         case "PAID":
             return .systemGreen
+        case "REJECTED":
+            return .red
+        case "APPROVED":
+            return .systemGreen
         default:
             return .gray
         }
@@ -52,6 +56,22 @@ extension String {
         
         return formatter.string(from: date)
     }
+    
+    func toFormattedDateAndTimeStringWith12HourFormat() -> String? {
+        let isoFormatter = ISO8601DateFormatter()
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        
+        guard let date = isoFormatter.date(from: self) else {
+            return nil
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy, hh:mm a"  // 12-hour format with AM/PM
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        
+        return formatter.string(from: date)
+    }
+
     
     func toHourMinute() -> String? {
         let isoFormatter = ISO8601DateFormatter()

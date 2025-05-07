@@ -67,7 +67,9 @@ extension NewsDetailViewController: UICollectionViewDelegate, UICollectionViewDa
                 return UICollectionViewCell()
             }
             if let detail = newsDetail {
-                cell.announcedFigureImageView.sd_setImage(with: URL(string: "https://library.usask.ca/images/news/extended-library-hours.jpg"), placeholderImage: UIImage(systemName: "photo"))
+                cell.announcedFigureImageView.sd_setImage(
+                    with: URL(string: "https://images.pexels.com/photos/256559/pexels-photo-256559.jpeg"),
+                    placeholderImage: UIImage(systemName: "photo"))
                 cell.configure(with: detail)
             }
             return cell
@@ -82,7 +84,7 @@ extension NewsDetailViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == newsDetailCollectionView {
-            return CGSize(width: collectionView.frame.width-32, height: 500)
+            return CGSize(width: collectionView.frame.width-32, height: 525)
         }
         return .zero
     }

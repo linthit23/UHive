@@ -38,9 +38,9 @@ class BookingsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchFacilities()
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+        fetchFacilities()
     }
     
     private func layout() {

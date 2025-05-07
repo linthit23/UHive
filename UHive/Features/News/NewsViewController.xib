@@ -28,7 +28,7 @@
                         <constraint firstAttribute="width" constant="25" id="6hu-ck-Pxs"/>
                     </constraints>
                 </imageView>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="g09-xl-ekY">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="g09-xl-ekY">
                     <rect key="frame" x="0.0" y="159" width="393" height="693"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gZ3-ds-Jqi">

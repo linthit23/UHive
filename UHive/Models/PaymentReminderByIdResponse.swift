@@ -10,7 +10,7 @@ import Foundation
 struct PaymentReminderByIdResponse: Decodable {
     let id: String
     let dueDate: String
-    let amount: Int
+    let amount: Float
     let createdAt: String
     let updatedAt: String
     let users: [PaymentReminderUser]

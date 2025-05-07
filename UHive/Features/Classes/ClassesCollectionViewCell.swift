@@ -17,8 +17,7 @@ class ClassesCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var classNameLabel: UILabel!
     @IBOutlet weak var roomNumberLabel: UILabel!
     @IBOutlet weak var lecturerNameLabel: UILabel!
-    @IBOutlet weak var statusContainerView: UIView!
-    @IBOutlet weak var statusLabel: UILabel!
+
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,9 +25,7 @@ class ClassesCollectionViewCell: UICollectionViewCell {
     }
     
     private func style() {
-        statusContainerView.roundCorners(radius: 9, corners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
-        statusContainerView.isHidden = true
-        statusLabel.isHidden = true
+        
     }
     
     func configure(with session: Class) {

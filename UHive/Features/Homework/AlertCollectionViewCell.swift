@@ -14,7 +14,6 @@ class AlertCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentContainerView: UIView!
     @IBOutlet weak var alertNameLabel: UILabel!
     @IBOutlet weak var dueDateLabel: UILabel!
-    @IBOutlet weak var alertTypeLabel: UILabel!
     @IBOutlet weak var countDownNumberLabel: UILabel!
     @IBOutlet weak var countDownHoursLabel: UILabel!
     
@@ -36,22 +35,7 @@ class AlertCollectionViewCell: UICollectionViewCell {
     
     func configure(with test: Test) {
         alertNameLabel.text = test.content
-        dueDateLabel.text = test.dueDate.toFormattedDateAndTimeString()
-        switch test.content {
-        case "Mathematics Final Exam":
-            alertTypeLabel.text = "Written, cumulative"
-        case "Computer Science Coding Test":
-            alertTypeLabel.text = "Practical programming"
-        case "Biology Lab Practical Test":
-            alertTypeLabel.text = "Hands-on lab work"
-        case "History Eassy Test":
-            alertTypeLabel.text = "Critical writing"
-        case "Psychology Multiple-Choice Test":
-            alertTypeLabel.text = "Theory-based MCQs"
-        case "Mechanical Design Test":
-            alertTypeLabel.text = "Project-based assessment"
-        default: alertTypeLabel.text = "-"
-        }
+        dueDateLabel.text = test.dueDate.toDisplayDate()
         
         if isFutureDate(test.dueDate) {
             countDownNumberLabel.isHidden = false

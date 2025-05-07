@@ -15,7 +15,7 @@ struct PaymentReminderResponse: Decodable {
 struct PaymentReminder: Decodable {
     let id: String
     let dueDate: String
-    let amount: Int
+    let amount: Float
     let createdAt: String
     let updatedAt: String
     let status: String

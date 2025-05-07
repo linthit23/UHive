@@ -56,6 +56,10 @@ class FacilityCollectionViewCell: UICollectionViewCell {
             iconImageView.image = UIImage(systemName: "paintpalette.fill")
         default: break
         }
-        titleLabel.text = facility.name
+        if facility.name == "Art & Design Studio" {
+            titleLabel.text = "Art Studio"
+        } else {
+            titleLabel.text = facility.name
+        }
     }
 }

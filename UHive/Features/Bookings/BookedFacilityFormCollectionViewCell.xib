@@ -23,7 +23,7 @@
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dYe-c3-JkR">
                                 <rect key="frame" x="10" y="10" width="320" height="150"/>
-                                <color key="backgroundColor" name="lightGreyColor"/>
+                                <color key="tintColor" name="primaryAppColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="vMG-id-lof"/>
                                 </constraints>
@@ -174,8 +174,8 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <namedColor name="lightGreyColor">
-            <color red="0.59999999999999998" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="primaryAppColor">
+            <color red="0.18431372549019609" green="0.6705882352941176" blue="0.80392156862745101" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

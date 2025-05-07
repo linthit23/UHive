@@ -21,11 +21,11 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YzX-nS-D6h">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="88"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" spacing="60" translatesAutoresizingMaskIntoConstraints="NO" id="O3t-vL-V3B">
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="30" translatesAutoresizingMaskIntoConstraints="NO" id="O3t-vL-V3B">
                                 <rect key="frame" x="16" y="16.666666666666671" width="288" height="55"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Kjc-4m-mwA">
-                                        <rect key="frame" x="0.0" y="0.0" width="192" height="55"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="222" height="55"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iNh-pC-SFC">
                                                 <rect key="frame" x="0.0" y="0.0" width="40" height="55"/>
@@ -36,7 +36,7 @@
                                                 </constraints>
                                             </imageView>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="zNb-40-wOm">
-                                                <rect key="frame" x="48" y="0.0" width="144" height="55"/>
+                                                <rect key="frame" x="48" y="0.0" width="174" height="55"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73G-Pc-Et0">
                                                         <rect key="frame" x="0.0" y="0.0" width="36" height="18.333333333333332"/>
@@ -57,7 +57,7 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="Txd-bN-9g6">
                                         <rect key="frame" x="252" y="0.0" width="36" height="55"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgE-4v-HTj">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zgE-4v-HTj">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="18.333333333333332"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
                                                 <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
