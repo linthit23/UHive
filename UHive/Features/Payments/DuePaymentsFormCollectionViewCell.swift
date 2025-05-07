@@ -35,9 +35,9 @@ class DuePaymentsFormCollectionViewCell: UICollectionViewCell {
     }
     
     func configure(with reminder: PaymentReminderByIdResponse) {
-        let userInfo = reminder.users.first
-        
-//        titleLabel.text =
+        let matchingId = ProfileResponse.loadFromCache()?.id
+        let userInfo = reminder.users.filter { $0.id == matchingId }.first
+
         postedDateLabel.text = "posted on " + (reminder.createdAt.toDisplayDate() ?? "")
         statusLabel.text = userInfo?.status.capitalizedFirstLetter()
         statusLabel.textColor = userInfo?.status.statusColor()

@@ -62,13 +62,15 @@ class PaymentService {
             request.url,
             method: request.method,
             parameters: request.parameters,
-            encoding: JSONEncoding.default,
             headers: request.headers
         ) { (result: Result<PaymentSubmissionResponse, AFError>) in
             switch result {
             case .success(let response):
                 completion(response)
             case .failure(let error):
+                print(request.url)
+                print(request.method)
+                print(request.headers)
                 print("Failed to submit payment reminder \(error.localizedDescription)")
                 completion(nil)
             }

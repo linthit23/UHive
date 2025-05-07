@@ -9,6 +9,8 @@ import UIKit
 
 class BookedFacilityFormCollectionViewCell: UICollectionViewCell {
 
+    weak var delegate: BookedFacilityFormCollectionViewCellDelegate?
+    
     static let reuseIdentifier: String = String(describing: BookedFacilityFormCollectionViewCell.self)
     
     @IBOutlet weak var contentContainerView: UIView!
@@ -44,5 +46,13 @@ class BookedFacilityFormCollectionViewCell: UICollectionViewCell {
         facilityBookingStatusLabel.textColor = booking.status.statusColor()
         facilityBookingReasonForUseLabel.text = booking.reason
     }
+    
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        delegate?.didTapCancelButton(in: self)
+    }
 
+}
+
+protocol BookedFacilityFormCollectionViewCellDelegate: AnyObject {
+    func didTapCancelButton(in cell: BookedFacilityFormCollectionViewCell)
 }

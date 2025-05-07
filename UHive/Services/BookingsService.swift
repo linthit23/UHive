@@ -68,4 +68,21 @@ class BookingsService {
             }
         }
     }
+    
+    func cancelBooking(id: String, completion: @escaping (BookedFacilityResponse?) -> Void) {
+        let request = APIManager.cancelBookingRequest(id: id)
+        NetworkManager.shared.request(
+            request.url,
+            method: request.method,
+            headers: request.headers
+        ) { (result: Result<BookedFacilityResponse, AFError>) in
+            switch result {
+            case .success(let response):
+                completion(response)
+            case .failure(let error):
+                print("Failed to cancel bookng: \(error.localizedDescription)")
+                completion(nil)
+            }
+        }
+    }
 }

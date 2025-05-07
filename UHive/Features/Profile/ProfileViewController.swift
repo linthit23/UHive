@@ -38,6 +38,7 @@ class ProfileViewController: UIViewController {
     func style() {
         logoutButton.addDropShadow()
         logoutButton.tintColor = .white
+        avatarImageView.image = UIImage(systemName: "person.circle")
     }
     
     func layout() {

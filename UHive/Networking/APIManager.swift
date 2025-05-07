@@ -10,7 +10,7 @@ import Alamofire
 
 enum APIManager {
     
-    static let baseURL = "http://192.168.1.134:3000"
+    static let baseURL = "https://uhive-server-262dc77fced5.herokuapp.com"
     
     enum Endpoint {
         case login
@@ -30,6 +30,8 @@ enum APIManager {
         case commentOnPost(String)
         case likeOnPost(String)
         case unlikeOnPost(String)
+        case posting
+        case cancelBooking(String)
         
         var path: String {
             switch self {
@@ -67,6 +69,10 @@ enum APIManager {
                 return "/posts/\(id)/like"
             case .unlikeOnPost(let id):
                 return "/posts/\(id)/unlike"
+            case .posting:
+                return "/posts"
+            case .cancelBooking(let id):
+                return "/facilities/\(id)/cancel"
             }
         }
     }
@@ -110,10 +116,8 @@ enum APIManager {
     static func submitPayment(id: String) -> (url: String, method: HTTPMethod, parameters: Parameters, headers: HTTPHeaders) {
         let url = makeURL(for: .submitPayment(id))
         let invoice = "INV-\(Int(Date().timeIntervalSince1970))"
-        let slip = "http://localhost:3000/images/\(UUID().uuidString).png"
         let parameters: Parameters = [
-            "invoice": invoice,
-            "slip": slip
+            "invoice": invoice
         ]
         let headers = AuthManager.shared.authHeaders()
         return (url, .post, parameters, headers)
@@ -204,6 +208,21 @@ enum APIManager {
     
     static func unlikeOnPostRequest(id: String) -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
         let url = makeURL(for: .unlikeOnPost(id))
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .post, headers)
+    }
+    
+    static func postingRequest(content: String) -> (url: String, method: HTTPMethod, parameters: Parameters, headers: HTTPHeaders) {
+        let url = makeURL(for: .posting)
+        let parameters: Parameters = [
+            "content": content
+        ]
+        let headers = AuthManager.shared.authHeaders()
+        return (url, .post, parameters, headers)
+    }
+    
+    static func cancelBookingRequest(id: String) -> (url: String, method: HTTPMethod, headers: HTTPHeaders) {
+        let url = makeURL(for: .cancelBooking(id))
         let headers = AuthManager.shared.authHeaders()
         return (url, .post, headers)
     }

@@ -116,4 +116,26 @@ class PostsService {
             }
         }
     }
+    
+    func posting(
+        content: String,
+        completion: @escaping (CommentPost?) -> Void
+    ) {
+        let request = APIManager.postingRequest(content: content)
+        
+        NetworkManager.shared.request(
+            request.url,
+            method: request.method,
+            parameters: request.parameters,
+            encoding: JSONEncoding.default,
+            headers: request.headers) { (result: Result<CommentPost, AFError>) in
+                switch result {
+                case .success(let response):
+                    completion(response)
+                case .failure(let error):
+                    print("Failed to fetch post: \(error.localizedDescription)")
+                    completion(nil)
+                }
+            }
+    }
 }

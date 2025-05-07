@@ -34,12 +34,12 @@ class BookingsViewController: UIViewController {
         bookingsSegmentedControl.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         
         fetchFacilities()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        fetchFacilities()
+
         self.navigationController?.setNavigationBarHidden(true, animated: false)
     }
     

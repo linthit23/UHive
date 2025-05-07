@@ -55,6 +55,29 @@ class FacilityBookingFormCollectionViewCell: UICollectionViewCell, UITextFieldDe
     }
     
     func configure(with facility: Facility) {
+        switch facility.name {
+        case "Main Library":
+            facilityPictureImageView.image = UIImage(systemName: "books.vertical")
+        case "Computer Lab A":
+            facilityPictureImageView.image = UIImage(systemName: "desktopcomputer")
+        case "Physics Lab":
+            facilityPictureImageView.image = UIImage(systemName: "atom")
+        case "Chemistry Lab":
+            facilityPictureImageView.image = UIImage(systemName: "flask")
+        case "Auditorium":
+            facilityPictureImageView.image = UIImage(systemName: "music.note.house")
+        case "Sports Complex":
+            facilityPictureImageView.image = UIImage(systemName: "figure.run")
+        case "Meeting Room 101":
+            facilityPictureImageView.image = UIImage(systemName: "person.2.square.stack")
+        case "Study Room 1":
+            facilityPictureImageView.image = UIImage(systemName: "book.closed")
+        case "Language Lab":
+            facilityPictureImageView.image = UIImage(systemName: "mic.fill")
+        case "Art & Design Studio":
+            facilityPictureImageView.image = UIImage(systemName: "paintpalette.fill")
+        default: break
+        }
         facilityNameLabel.text = facility.name
         // Set to one day ahead of now
         if let tomorrow = Calendar.current.date(byAdding: .day, value: 1, to: Date()) {

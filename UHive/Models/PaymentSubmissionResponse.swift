@@ -12,12 +12,10 @@ struct PaymentSubmissionResponse: Decodable {
     let user: String
     let paymentReminder: String
     let status: String
-    let invoice: String
-    let slip: String
     
     enum CodingKeys: String, CodingKey {
         case id = "_id"
-        case user, paymentReminder, status, invoice, slip
+        case user, paymentReminder, status
     }
 }
 

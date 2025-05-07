@@ -16,10 +16,19 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var feedCollectionView: UICollectionView!
     @IBOutlet weak var boxHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var profileHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var postingLabelView: UIView!
+    @IBOutlet weak var postingLabel: UILabel!
+    @IBOutlet weak var postingHeightConstraint: NSLayoutConstraint!
     
     private var lastContentOffset: CGFloat = 0
     private let originalBoxHeight: CGFloat = 128
     private var originalProfileHeight: CGFloat = 60
+    private var originalPostingHeight: CGFloat = 60
+    
+    private var blurEffectView: UIVisualEffectView!
+    private var postContainerView: UIView!
+    private var postTextView: UITextView!
+    private var submitButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,10 +43,17 @@ class HomeViewController: UIViewController {
         
         layout()
         style()
+        setupPostUI()
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openProfile))
         profileView.isUserInteractionEnabled = true
         profileView.addGestureRecognizer(tapGesture)
+        
+        let tapGestureForPosting = UITapGestureRecognizer(target: self, action: #selector(openPosting))
+        postingLabel.isUserInteractionEnabled = true
+        postingLabel.addGestureRecognizer(tapGestureForPosting)
+        postingLabelView.isUserInteractionEnabled = true
+        postingLabelView.addGestureRecognizer(tapGestureForPosting)
         
         fetchPosts()
     }
@@ -46,6 +62,7 @@ class HomeViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         profileView.roundCorners(radius: 30, corners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
+        postingLabelView.roundCorners(radius: 30, corners: [.layerMaxXMaxYCorner, .layerMaxXMinYCorner, .layerMinXMaxYCorner, .layerMinXMinYCorner])
     }
     
     private func layout() {
@@ -68,6 +85,84 @@ class HomeViewController: UIViewController {
         profileVC.modalPresentationStyle = .pageSheet
         profileVC.isModalInPresentation = true
         self.present(profileVC, animated: true)
+    }
+    
+    private func setupPostUI() {
+        let blurEffect = UIBlurEffect(style: .systemMaterialDark)
+        blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.alpha = 0
+        view.addSubview(blurEffectView)
+        
+        let dismissTap = UITapGestureRecognizer(target: self, action: #selector(dismissPostUI))
+        blurEffectView.addGestureRecognizer(dismissTap)
+        
+        postContainerView = UIView()
+        postContainerView.backgroundColor = .white
+        postContainerView.layer.cornerRadius = 16
+        postContainerView.translatesAutoresizingMaskIntoConstraints = false
+        postContainerView.alpha = 0
+        view.addSubview(postContainerView)
+        
+        postTextView = UITextView()
+        postTextView.font = UIFont.systemFont(ofSize: 16)
+        postTextView.layer.borderWidth = 1
+        postTextView.layer.borderColor = UIColor.gray.cgColor
+        postTextView.layer.cornerRadius = 8
+        postTextView.translatesAutoresizingMaskIntoConstraints = false
+        postContainerView.addSubview(postTextView)
+        
+        submitButton = UIButton(type: .system)
+        submitButton.setTitle("Post", for: .normal)
+        submitButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        submitButton.backgroundColor = .systemBlue
+        submitButton.setTitleColor(.white, for: .normal)
+        submitButton.layer.cornerRadius = 8
+        submitButton.translatesAutoresizingMaskIntoConstraints = false
+        submitButton.addTarget(self, action: #selector(submitPost), for: .touchUpInside)
+        postContainerView.addSubview(submitButton)
+        
+        NSLayoutConstraint.activate([
+            postContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            postContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            postContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
+            postContainerView.heightAnchor.constraint(equalToConstant: 200),
+            
+            postTextView.topAnchor.constraint(equalTo: postContainerView.topAnchor, constant: 16),
+            postTextView.leadingAnchor.constraint(equalTo: postContainerView.leadingAnchor, constant: 16),
+            postTextView.trailingAnchor.constraint(equalTo: postContainerView.trailingAnchor, constant: -16),
+            postTextView.heightAnchor.constraint(equalToConstant: 100),
+            
+            submitButton.topAnchor.constraint(equalTo: postTextView.bottomAnchor, constant: 12),
+            submitButton.leadingAnchor.constraint(equalTo: postTextView.leadingAnchor),
+            submitButton.trailingAnchor.constraint(equalTo: postTextView.trailingAnchor),
+            submitButton.heightAnchor.constraint(equalToConstant: 44)
+        ])
+    }
+
+    
+    @objc func openPosting() {
+        submitButton.setTitle("Post", for: .normal)
+        submitButton.isEnabled = true
+        UIView.animate(withDuration: 0.3) {
+            self.blurEffectView.alpha = 1
+            self.postContainerView.alpha = 1
+        }
+    }
+    
+    @objc func submitPost() {
+        guard let text = postTextView.text, !text.isEmpty else { return }
+        submitButton.setTitle("Posting...", for: .normal)
+        submitButton.isEnabled = false
+        uploadPost(text)
+    }
+    
+    @objc func dismissPostUI() {
+        postTextView.resignFirstResponder()
+        UIView.animate(withDuration: 0.3) {
+            self.blurEffectView.alpha = 0
+            self.postContainerView.alpha = 0
+        }
     }
     
     func openFeature(_ indexPath: IndexPath) {
@@ -107,6 +202,22 @@ class HomeViewController: UIViewController {
             DispatchQueue.main.async {
                 self.feedCollectionView.reloadData()
             }
+        }
+    }
+    
+    func uploadPost(_ content: String) {
+        PostsService().posting(content: content) { [weak self] post in
+            guard let self = self, let _ = post else {
+                print("Failed to post")
+                return
+            }
+            postTextView.resignFirstResponder()
+            UIView.animate(withDuration: 0.3) {
+                self.blurEffectView.alpha = 0
+                self.postContainerView.alpha = 0
+            }
+            postTextView.text = ""
+            fetchPosts()
         }
     }
     
@@ -247,6 +358,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if boxHeightConstraint.constant != 0 {
                     boxHeightConstraint.constant = 0
                     profileHeightConstraint.constant = 0
+                    postingHeightConstraint.constant = 0
                     UIView.animate(withDuration: 0.4) {
                         self.view.layoutIfNeeded()
                     }
@@ -256,6 +368,7 @@ extension HomeViewController: UICollectionViewDelegate, UICollectionViewDataSour
                 if boxHeightConstraint.constant == 0 {
                     boxHeightConstraint.constant = originalBoxHeight
                     profileHeightConstraint.constant = originalProfileHeight
+                    postingHeightConstraint.constant = originalPostingHeight
                     UIView.animate(withDuration: 0.4) {
                         self.view.layoutIfNeeded()
                     }

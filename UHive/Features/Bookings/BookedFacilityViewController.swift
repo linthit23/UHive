@@ -34,7 +34,6 @@ class BookedFacilityViewController: UIViewController {
     
     private func style() {}
 
-
 }
 
 extension BookedFacilityViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -50,6 +49,7 @@ extension BookedFacilityViewController: UICollectionViewDelegate, UICollectionVi
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BookedFacilityFormCollectionViewCell.reuseIdentifier, for: indexPath) as? BookedFacilityFormCollectionViewCell else {
             return UICollectionViewCell()
         }
+        cell.delegate = self
         if let booking = booking {
             cell.configure(with: booking)
         }
@@ -63,5 +63,50 @@ extension BookedFacilityViewController: UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width-32, height: collectionView.frame.height)
+    }
+}
+
+extension BookedFacilityViewController: BookedFacilityFormCollectionViewCellDelegate {
+    func didTapCancelButton(in cell: BookedFacilityFormCollectionViewCell) {
+        let alertController = UIAlertController(
+            title: "Cancel Booking",
+            message: "Are you sure you want to cancel?",
+            preferredStyle: .alert
+        )
+        
+        let yesAction = UIAlertAction(title: "Yes", style: .default) {
+            [weak self] _ in
+            cell.facilityBookingCancelButton.isEnabled = false
+            cell.facilityBookingCancelButton.setTitle("Canceling booking...", for: .normal)
+            
+            guard let booking = self?.booking else {
+                self?.showAlert(message: "Cancel booking failed. Please try again later.")
+                return
+            }
+                
+                BookingsService().cancelBooking(id: booking.id) { [weak self] success in
+                    DispatchQueue.main.async {
+                        if (success != nil) {
+                            self?.navigationController?.popViewController(animated: true)
+                        } else {
+                            self?.navigationController?.popViewController(animated: true)
+                            self?.showAlert(message: "Cancel booking failed. Please try again later.")
+                        }
+                    }
+                }
+        }
+        
+        let cancelAction = UIAlertAction(title: "No", style: .destructive)
+        
+        alertController.addAction(yesAction)
+        alertController.addAction(cancelAction)
+        
+        self.present(alertController, animated: true)
+    }
+    
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "UHive", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
